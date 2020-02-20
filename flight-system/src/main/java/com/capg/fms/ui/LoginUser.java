@@ -1,7 +1,6 @@
 package com.capg.fms.ui;
 
 import java.util.Scanner;
-
 import com.capg.fms.model.User;
 import com.capg.fms.service.InvalidDetailsException;
 import com.capg.fms.service.UserService;
@@ -20,13 +19,15 @@ public class LoginUser {
 		System.out.println("Enter the userId:");
 		long id=sc.nextLong();
 		try {
-			if(service.validateId(id)) {
+			if(service.validateCustomerId(id)) {
 				user.setUserId(id);
 			}
 		System.out.println("Enter the password: ");
 		String pw=sc.next()+sc.nextLine();
-		user.setUserPassword(pw);
-		
+		if(service.validatePassword(pw)) {
+			user.setUserPassword(pw);
+		}
+
 		System.out.println("Enter the Name: ");
 		String name=sc.next()+sc.nextLine();
 		user.setUserName(name);
@@ -36,6 +37,7 @@ public class LoginUser {
 		if(service.validatePhoneNo(ph)) {
 			user.setUserPhone(ph);
 		}
+		
 		System.out.println("Enter the email: ");
 		String mail=sc.next()+sc.nextLine();
 		if(service.validateEmail(mail)) {
@@ -49,6 +51,7 @@ public class LoginUser {
 		}
 		else {
 			System.out.println("User id already exists....");
+			login();
 		}
 		}
 		catch (InvalidDetailsException e1) {
@@ -58,8 +61,7 @@ public class LoginUser {
 	}
 
 	public static void customerLogin() {
-		
-		service.initialUsersList();
+		service.initialCustomerList();
 		System.out.println("Enter the userId: ");
 		long cId = sc.nextLong();
 		String cPw=null ;
@@ -79,13 +81,11 @@ public class LoginUser {
 		else {
 			System.out.println("Invalid Id");
 			System.out.println("If new user then create a new account...");
-		}	
-		
-			
+		}		
 	}
+	
 	public static void adminLogin() {
-		
-		service.initialUsersList();
+		service.initialAdminList();
 		System.out.println("Enter the userId: ");
 		long aId = sc.nextLong();
 		String aPw=null ;
@@ -112,10 +112,7 @@ public class LoginUser {
 		System.out.println("1 - Admin");
 		System.out.println("2 - Customer");
 		System.out.println("3 - New User");
-		
-		
 		int choice=sc.nextInt();
-		
 		switch(choice) {
 			case 1:
 				adminLogin();

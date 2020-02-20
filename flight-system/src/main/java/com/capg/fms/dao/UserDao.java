@@ -11,8 +11,7 @@ public interface UserDao {
 	public List<User> viewUser();
 	public Map<Long,User> getUser();
 	public User viewUser(long userId);
-	public boolean updateUser(User user);
-	public boolean deleteUser(long userId);
-	public void addSomeUsers();
+	public void addSomeAdmins();
+	public void addSomeCustomers();
 
 }

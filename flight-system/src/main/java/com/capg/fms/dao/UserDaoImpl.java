@@ -1,5 +1,6 @@
 package com.capg.fms.dao;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +12,20 @@ public class UserDaoImpl implements UserDao {
 
 	Map<Long,User> userList=new HashMap<Long , User>();
 	
-	public void addSomeUsers() {
-		
-		User admin1=new User(12343456L,"Keerthi","dfgh456",9876543210L,"keerthi@gmail.com");
-		User admin2=new User(12343459L,"Kavya","34fsgj",9876543211L,"kavya@gmail.com");
+	public void addSomeAdmins() {
+		User admin1=new User(1234L,"Vikram","dfgh456",9876543210L,"vikram@gmail.com");
+		User admin2=new User(1235L,"Harsha","34fsgj",9876543211L,"harsha@gmail.com");
 		userList.put(admin1.getUserId(),admin1);
 		userList.put(admin2.getUserId(),admin2);
 	}
+	
+	public void addSomeCustomers() {
+		User customer1=new User(123456L,"Vikram","dfgh456",9876543210L,"vikram@gmail.com");
+		User customer2=new User(123567L,"Harsha","34fsgj",9876543211L,"harsha@gmail.com");
+		userList.put(customer1.getUserId(),customer1);
+		userList.put(customer2.getUserId(),customer2);
+	}
+	
 
 	public boolean addUser(User user) {
 		if(userList.containsKey(user.getUserId())){
@@ -37,7 +45,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public Map<Long, User> getUser() {
-		
 		return userList;
 	}
 	public User viewUser(long userId) {
@@ -48,26 +55,5 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
-	public boolean updateUser(User user) {
-		
-		if(!userList.containsKey(user)) {
-			return false;
-		}
-		User userUpdate=userList.get(user);
-		userUpdate.setUserName(user.getUserName());
-		userUpdate.setUserPassword(user.getUserPassword());
-		userUpdate.setUserId(user.getUserId());
-		userUpdate.setUserPhone(user.getUserPhone());
-		userUpdate.setUserEmail(user.getUserEmail());
-		return true;
-	}
-
-	public boolean deleteUser(long userId) {
-		
-		if(userList.containsKey(userId)) {
-			userList.remove(userId, userList.containsKey(userId));
-			return true;
-		}
-		return false;
-	}
+	
 }

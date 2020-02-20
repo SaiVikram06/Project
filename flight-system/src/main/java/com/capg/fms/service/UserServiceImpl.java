@@ -1,6 +1,5 @@
 package com.capg.fms.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,26 +16,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public List<User> viewUser() {
-		return d.viewUser();
-		
+		return d.viewUser();	
 	}
 
 	public Map<Long, User> getUser() {
-		return d.getUser();
-		
+		return d.getUser();	
 	}
 
 	public User viewUser(long userId) {
-		return d.viewUser(userId);
-		
+		return d.viewUser(userId);	
 	}
 
-	public void initialUsersList() {
-		d.addSomeUsers();
+	public void initialAdminList() {
+		d.addSomeAdmins();
+	}
+	
+	public void initialCustomerList() {
+		d.addSomeCustomers();
 	}
 	
 	public boolean validatePhoneNo(long phoneNo) throws InvalidDetailsException {
-		int count=0;
 		String s=Long.toString(phoneNo);
 		if(s.length()==10 && s.charAt(0)!=0)
 			return true;
@@ -44,26 +43,36 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidDetailsException("Invalid Phone Number");	
 	}
 
-	
 	public boolean validateEmail(String email) throws InvalidDetailsException {
+		
 	      String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 	      if(email.matches(regex))
 	    	  return true;
 	      else
 	    	  throw new InvalidDetailsException("Invalid email Id");
 	   }
-
-
-	public boolean validateId(long id) throws InvalidDetailsException {
+	
+	public boolean validateCustomerId(long id) throws InvalidDetailsException {
 		int count=0;
 		while(id>0) {
 			long d=id % 10;
 			count++;
 			id=id/10;
 		}
-		if(count==12)
+		if(count>=6)
 			return true;
 		else
 			throw new InvalidDetailsException("Invalid ID");	
 	}
+
+	public boolean validatePassword(String pw) throws InvalidDetailsException {
+		if(pw.length()>=8) {
+			return true;
+		}
+		else {
+			throw new InvalidDetailsException("Password should be of minimun 8 characters");
+		}
+	}
+
+
 }

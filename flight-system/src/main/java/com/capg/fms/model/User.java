@@ -1,19 +1,21 @@
 package com.capg.fms.model;
 
+
 public class User {
 
-	long userId;
-	String userName;
-	String userPassword; 
-	long userPhone;
-	String userEmail;
-	
+	private long userId;
+	private String userName;
+	private String userPassword; 
+	private long userPhone;
+	private String userEmail;
 	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(long userId, String userName, String userPassword, long userPhone, String userEmail) {
+	
+	public User(long userId, String userName, String userPassword, long userPhone,
+			String userEmail) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -96,6 +98,6 @@ public class User {
 	}
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
-	}	
+	}
 	
 }
